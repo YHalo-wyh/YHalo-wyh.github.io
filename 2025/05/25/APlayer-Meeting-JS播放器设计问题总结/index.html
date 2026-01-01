@@ -178,22 +178,47 @@
     
             
                 
-                    <script data-swup-reload-script>(function(){var t=JSON.parse(localStorage.getItem("REDEFINE-THEME-STATUS"));var d=t&&t.isDark;if(d===undefined||d===null){d=window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches}document.documentElement.classList.add(d?"dark-mode":"light-mode")})();</script>
-                
-    
-            
-                
-                    <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
-                
-    
-            
-                
-                    <style>.fa,.fa-solid,.fa-regular,.fa-brands,.fa-light,.fa-thin,.fa-duotone,[class^="fa-"],[class*=" fa-"]{opacity:0;transition:opacity .2s}.fonts-loaded .fa,.fonts-loaded .fa-solid,.fonts-loaded .fa-regular,.fonts-loaded .fa-brands,.fonts-loaded .fa-light,.fonts-loaded .fa-thin,.fonts-loaded .fa-duotone,.fonts-loaded [class^="fa-"],.fonts-loaded [class*=" fa-"]{opacity:1}.light-mode.home .navbar-container .navbar-content .navbar-item,.light-mode.home .navbar-container .navbar-content .navbar-item>a,.light-mode.home .navbar-container .navbar-content .navbar-item i,.light-mode.home .navbar-container .navbar-content .logo-title,.light-mode.home .navbar-container .navbar-content .logo-title h1,.light-mode.home .navbar-container .navbar-content .icon-item i,.light-mode.home .navbar-container .navbar-content .search i,.light-mode.home .navbar-container i,.light-mode.home .navbar-container svg{color:#C9A227 !important;fill:#C9A227 !important}.light-mode.home .navbar-container .navbar-content .navbar-bar-middle,.light-mode.home .navbar-container .navbar-content .navbar-bar-middle::before,.light-mode.home .navbar-container .navbar-content .navbar-bar-middle::after{background:#C9A227 !important}.light-mode:not(.home) .navbar-container .navbar-content .navbar-item,.light-mode:not(.home) .navbar-container .navbar-content .navbar-item>a,.light-mode:not(.home) .navbar-container .navbar-content .navbar-item i,.light-mode:not(.home) .navbar-container .navbar-content .logo-title,.light-mode:not(.home) .navbar-container .navbar-content .logo-title h1,.light-mode:not(.home) .navbar-container .navbar-content .icon-item i,.light-mode:not(.home) .navbar-container .navbar-content .search i,.light-mode:not(.home) .navbar-container i,.light-mode:not(.home) .navbar-container svg{color:#B8860B !important;fill:#B8860B !important}.light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle,.light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle::before,.light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle::after{background:#B8860B !important}.light-mode .navbar-container .sub-menu a{color:#333 !important}.light-mode .navbar-container .sub-menu a:hover{color:#B8860B !important}.dark-mode .statistics .label,.dark-mode .statistics .number{color:#fff !important}.light-mode .statistics .label,.light-mode .statistics .number{color:#000 !important}.light-mode div.preloader>h2.ml13{color:#C9A227 !important}.dark-mode div.preloader>h2.ml13{color:#fff !important}.dark-mode .navbar-container .navbar-content .navbar-item,.dark-mode .navbar-container .navbar-content .navbar-item>a,.dark-mode .navbar-container .navbar-content .navbar-item i,.dark-mode .navbar-container .navbar-content .logo-title,.dark-mode .navbar-container .navbar-content .logo-title h1,.dark-mode .navbar-container .navbar-content .icon-item i,.dark-mode .navbar-container .navbar-content .search i,.dark-mode .navbar-container i,.dark-mode .navbar-container svg{color:#fff !important;fill:#fff !important}.dark-mode .sidebar .author-info .author-name,.dark-mode .sidebar .author-info .author-label{color:#fff !important}</style>
-                
-    
-            
-                
-                    <script data-swup-reload-script>document.fonts&&document.fonts.ready.then(function(){document.documentElement.classList.add("fonts-loaded")});setTimeout(function(){document.documentElement.classList.add("fonts-loaded")},2000);</script>
+                    <style>
+/* 亮色模式首页导航栏金色 */
+html.light-mode.home .navbar-container .navbar-content .navbar-item,
+html.light-mode.home .navbar-container .navbar-content .navbar-item>a,
+html.light-mode.home .navbar-container .navbar-content .navbar-item i,
+html.light-mode.home .navbar-container .navbar-content .logo-title,
+html.light-mode.home .navbar-container .navbar-content .logo-title h1,
+html.light-mode.home .navbar-container .navbar-content .icon-item i,
+html.light-mode.home .navbar-container .navbar-content .search i,
+html.light-mode.home .navbar-container i,
+html.light-mode.home .navbar-container svg{color:#C9A227 !important;fill:#C9A227 !important}
+html.light-mode.home .navbar-container .navbar-content .navbar-bar-middle,
+html.light-mode.home .navbar-container .navbar-content .navbar-bar-middle::before,
+html.light-mode.home .navbar-container .navbar-content .navbar-bar-middle::after{background:#C9A227 !important}
+/* 亮色模式非首页导航栏深金色 */
+html.light-mode:not(.home) .navbar-container .navbar-content .navbar-item,
+html.light-mode:not(.home) .navbar-container .navbar-content .navbar-item>a,
+html.light-mode:not(.home) .navbar-container .navbar-content .navbar-item i,
+html.light-mode:not(.home) .navbar-container .navbar-content .logo-title,
+html.light-mode:not(.home) .navbar-container .navbar-content .logo-title h1,
+html.light-mode:not(.home) .navbar-container .navbar-content .icon-item i,
+html.light-mode:not(.home) .navbar-container .navbar-content .search i,
+html.light-mode:not(.home) .navbar-container i,
+html.light-mode:not(.home) .navbar-container svg{color:#B8860B !important;fill:#B8860B !important}
+html.light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle,
+html.light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle::before,
+html.light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle::after{background:#B8860B !important}
+/* 亮色模式子菜单 */
+html.light-mode .navbar-container .sub-menu a{color:#333 !important}
+html.light-mode .navbar-container .sub-menu a:hover{color:#B8860B !important}
+/* 统计数字颜色 */
+html.dark-mode .statistics .label,html.dark-mode .statistics .number{color:#fff !important}
+html.light-mode .statistics .label,html.light-mode .statistics .number{color:#000 !important}
+/* 预加载文字颜色 */
+html.light-mode div.preloader>h2.ml13{color:#C9A227 !important}
+html.dark-mode div.preloader>h2.ml13{color:#fff !important}
+/* 侧边栏作者信息 */
+html.dark-mode .sidebar .author-info .author-name,
+html.dark-mode .sidebar .author-info .author-label{color:#fff !important}
+</style>
+
                 
     
 
