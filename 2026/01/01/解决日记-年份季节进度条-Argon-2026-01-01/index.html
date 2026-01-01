@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Heart">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://YHalo-wyh.github.io/2026/01/01/解决日记-年份季节进度条-argon-2026-01-01/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Heart的开发日记">
+<meta property="og:url" content="https://yhalo-wyh.github.io/2026/01/01/%E8%A7%A3%E5%86%B3%E6%97%A5%E8%AE%B0-%E5%B9%B4%E4%BB%BD%E5%AD%A3%E8%8A%82%E8%BF%9B%E5%BA%A6%E6%9D%A1-Argon-2026-01-01/index.html">
+<meta property="og:site_name" content="Heart的开发日记">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yhalo-wyh.github.io/images/redefine-og.webp">
+<meta property="article:published_time" content="2026-01-01T06:29:42.743Z">
+<meta property="article:modified_time" content="2026-01-01T05:55:57.462Z">
+<meta property="article:author" content="Heart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yhalo-wyh.github.io/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://cdn.yhalo.cn/Heart_Development_Diary/COVER/%E6%A2%85%E7%8E%B2%E5%A8%9C.jpg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.yhalo.cn/Heart_Development_Diary/COVER/%E6%A2%85%E7%8E%B2%E5%A8%9C.jpg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="https://cdn.yhalo.cn/Heart_Development_Diary/COVER/%E6%A2%85%E7%8E%B2%E5%A8%9C.jpg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Heart的开发日记 - 探索·记录·分享
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+        
+            
+    
+            
+    
+            
+                
+                    <style>.light-mode.home .navbar-container .navbar-content .navbar-item, .light-mode.home .navbar-container .navbar-content .navbar-item > a, .light-mode.home .navbar-container .navbar-content .navbar-item i, .light-mode.home .navbar-container .navbar-content .logo-title, .light-mode.home .navbar-container .navbar-content .logo-title h1, .light-mode.home .navbar-container .navbar-content .icon-item i, .light-mode.home .navbar-container .navbar-content .search i, .light-mode.home .navbar-container i, .light-mode.home .navbar-container svg { color: #F5D67B !important; fill: #F5D67B !important; } .light-mode.home .navbar-container .navbar-content .navbar-bar-middle, .light-mode.home .navbar-container .navbar-content .navbar-bar-middle::before, .light-mode.home .navbar-container .navbar-content .navbar-bar-middle::after { background: #F5D67B !important; } .light-mode:not(.home) .navbar-container .navbar-content .navbar-item, .light-mode:not(.home) .navbar-container .navbar-content .navbar-item > a, .light-mode:not(.home) .navbar-container .navbar-content .navbar-item i, .light-mode:not(.home) .navbar-container .navbar-content .logo-title, .light-mode:not(.home) .navbar-container .navbar-content .logo-title h1, .light-mode:not(.home) .navbar-container .navbar-content .icon-item i, .light-mode:not(.home) .navbar-container .navbar-content .search i, .light-mode:not(.home) .navbar-container i, .light-mode:not(.home) .navbar-container svg { color: #B8860B !important; fill: #B8860B !important; } .light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle, .light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle::before, .light-mode:not(.home) .navbar-container .navbar-content .navbar-bar-middle::after { background: #B8860B !important; } .light-mode .navbar-container .sub-menu a { color: #333 !important; } .light-mode .navbar-container .sub-menu a:hover { color: #B8860B !important; } .light-mode.home .home-banner-container .description, .light-mode.home .home-banner-container #subtitle, .light-mode.home .home-banner-container .typed-cursor { color: #F5D67B !important; } .dark-mode .statistics .label, .dark-mode .statistics .number { color: #fff !important; } .light-mode .statistics .label, .light-mode .statistics .number { color: #000 !important; }</style>
+                
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"yhalo-wyh.github.io","root":"/","language":"en"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["Lv462"]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn.yhalo.cn/Heart_Development_Diary/COVER/%E7%B1%B3%E5%87%AF%E6%8B%89.jpg","dark":"https://cdn.yhalo.cn/Heart_Development_Diary/COVER/%E6%89%98%E8%8E%89%E5%A8%9C.jpg"},"title":"将我的爱，弃置于此","subtitle":{"text":["..."],"hitokoto":{"enable":true,"show_author":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#F5D67B","dark":"#fff"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":"https://github.com/YHalo-wyh","instagram":null,"zhihu":null,"twitter":null,"email":"285117859@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":true,"type":"fixed","audios":[{"name":"飘向北方","artist":"肖倾月","url":"https://api.injahow.cn/meting/?server=netease&type=url&id=1492558811","cover":"https://api.injahow.cn/meting/?server=netease&type=pic&id=109951165436699270","lrc":"https://api.injahow.cn/meting/?server=netease&type=lrc&id=1492558811"},{"name":"一等情事","artist":"许一鸣","url":"https://yhalo-wyh.github.io/songs/一等情事.mp3","cover":"https://api.injahow.cn/meting/?server=netease&type=pic&id=109951169398616448","lrc":"https://api.injahow.cn/meting/?server=netease&type=lrc&id=1846565957"}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://status.ohevan.com/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/YHalo-wyh","Blog":"https://yhalo.cn"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2025/2/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Heart的开发日记
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   target="_blank" rel="noopener" href="https://status.ohevan.com/"
+                                        >
+                                    <i class="fa-regular fa-chart-bar fa-fw"></i>
+                                    STATUS
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    ABOUT
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/YHalo-wyh">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://yhalo.cn">
+                                                    BLOG
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           target="_blank" rel="noopener" href="https://status.ohevan.com/"
+                        >
+                            <span>
+                                STATUS
+                            </span>
+                            
+                                <i class="fa-regular fa-chart-bar fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                ABOUT
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/YHalo-wyh">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://yhalo.cn">BLOG</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">6</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3"></h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://cdn.yhalo.cn/Heart_Development_Diary/COVER/%E6%A2%85%E7%8E%B2%E5%A8%9C.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">Heart</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv462</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2026-01-01 14:29:42</span>
+        <span class="mobile">2026-01-01 14:29:42</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2026-01-01 13:55:57</span>
+            <span class="mobile">2026-01-01 13:55:57</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="解决日记：Argon-主题小工具「年份-季节进度条」与自定义鼠标光标（2026-01-01）"><a href="#解决日记：Argon-主题小工具「年份-季节进度条」与自定义鼠标光标（2026-01-01）" class="headerlink" title="解决日记：Argon 主题小工具「年份&#x2F;季节进度条」与自定义鼠标光标（2026-01-01）"></a>解决日记：Argon 主题小工具「年份&#x2F;季节进度条」与自定义鼠标光标（2026-01-01）</h1><h2 id="今天做了什么"><a href="#今天做了什么" class="headerlink" title="今天做了什么"></a>今天做了什么</h2><p>在 WordPress（Argon Theme + PJAX）里做了两个前端小功能，并排查了「进度条不动&#x2F;不显示」等问题：</p>
+<ol>
+<li><strong>自定义鼠标光标</strong>：桌面端显示，手机&#x2F;平板不显示。  </li>
+<li><strong>年份进度条 + 季节进度条</strong>：季节进度在冬季跨年时计算错误，且一度出现 UI 不显示（脚本报错）。</li>
+</ol>
+<hr>
+<h2 id="问题-1：自定义鼠标光标在网页变窄时消失"><a href="#问题-1：自定义鼠标光标在网页变窄时消失" class="headerlink" title="问题 1：自定义鼠标光标在网页变窄时消失"></a>问题 1：自定义鼠标光标在网页变窄时消失</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>鼠标光标使用 <code>@media (max-width: 1300px)</code> 控制隐藏，导致浏览器窗口变窄时也隐藏（即使仍在桌面端）。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p><code>max-width</code> 是按 <strong>视口宽度</strong> 判断，不是按“设备类型”。桌面浏览器窗口变窄也会命中媒体查询。</p>
+<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>用「<strong>设备能力</strong>」而不是「宽度」判断：  </p>
+<ul>
+<li>通过 CSS 判断是否支持 hover（大多数桌面鼠标支持 hover）。  </li>
+<li>或用 JS 判断触摸能力（更通用）。  <blockquote>
+<p>这里最终目标是：<strong>只在桌面端显示，手机&#x2F;平板不显示</strong>。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="推荐写法（桌面端-hover-才显示）"><a href="#推荐写法（桌面端-hover-才显示）" class="headerlink" title="推荐写法（桌面端 hover 才显示）"></a>推荐写法（桌面端 hover 才显示）</h3><div class="code-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">&quot;custom-cursor&quot;</span> <span class="attr">src</span>=<span class="string">&quot;你的光标.gif&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;cursor&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-id">#custom-cursor</span>&#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">position</span>: fixed;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">width</span>: <span class="number">50px</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">height</span>: <span class="number">50px</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">pointer-events</span>: none;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">z-index</span>: <span class="number">9999</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">transition</span>: transform <span class="number">0.05s</span> linear;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="comment">/* 触控设备（通常移动端/平板）隐藏 */</span></span></span><br><span class="line"><span class="language-css"><span class="keyword">@media</span> (<span class="attribute">hover</span>: none), (<span class="attribute">pointer</span>: coarse)&#123;</span></span><br><span class="line"><span class="language-css">  <span class="selector-id">#custom-cursor</span>&#123; <span class="attribute">display</span>:none <span class="meta">!important</span>; &#125;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> cursor = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;custom-cursor&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> isTouch = <span class="variable language_">window</span>.<span class="title function_">matchMedia</span>(<span class="string">&quot;(hover: none), (pointer: coarse)&quot;</span>).<span class="property">matches</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (!isTouch) &#123;</span></span><br><span class="line"><span class="language-javascript">    cursor.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&quot;block&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;mousemove&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      cursor.<span class="property">style</span>.<span class="property">left</span> = e.<span class="property">clientX</span> + <span class="string">&quot;px&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">      cursor.<span class="property">style</span>.<span class="property">top</span>  = e.<span class="property">clientY</span> + <span class="string">&quot;px&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">&#125;)();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h2 id="问题-2：季节进度条「不动」-冬季进度算错"><a href="#问题-2：季节进度条「不动」-冬季进度算错" class="headerlink" title="问题 2：季节进度条「不动」&#x2F; 冬季进度算错"></a>问题 2：季节进度条「不动」&#x2F; 冬季进度算错</h2><h3 id="现象-1"><a href="#现象-1" class="headerlink" title="现象"></a>现象</h3><p>春夏秋正常，<strong>冬季</strong>（12月～次年2月）会出现进度一直 0% 或跳变异常。</p>
+<h3 id="根因"><a href="#根因" class="headerlink" title="根因"></a>根因</h3><p><code>Date.getMonth()</code> 返回 <strong>0~11</strong>（0 代表 1 月）。citeturn0search0<br>冬季跨年时，如果只把 <code>seasonYear--</code>（把年份挪到上一年），却仍用同一个年份去算 2 月的结束日期，会导致：</p>
+<ul>
+<li><code>seasonEnd &lt; seasonStart</code>（结束时间比开始时间还早）</li>
+<li>进度变负数后又被 clamp 到 0 → 看起来“不动”</li>
+</ul>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>冬季要拆成两个年份：</p>
+<ul>
+<li><strong>12月</strong>：开始年 &#x3D; 当年，结束年 &#x3D; 次年  </li>
+<li><strong>1-2月</strong>：开始年 &#x3D; 上一年，结束年 &#x3D; 当年</li>
+</ul>
+<p>另外，计算“本月最后一天”可用常见写法：<br><code>new Date(year, month + 1, 0)</code>（day&#x3D;0 表示“上个月最后一天”，因此 month+1 的 0 天就是“本月最后一天”）。citeturn0search6</p>
+<hr>
+<h2 id="问题-3：UI-不显示-控制台报错-Unexpected-token"><a href="#问题-3：UI-不显示-控制台报错-Unexpected-token" class="headerlink" title="问题 3：UI 不显示 + 控制台报错 Unexpected token &#39;&lt;&#39;"></a>问题 3：UI 不显示 + 控制台报错 <code>Unexpected token &#39;&lt;&#39;</code></h2><h3 id="现象-2"><a href="#现象-2" class="headerlink" title="现象"></a>现象</h3><p>进度条 UI 空白，控制台出现：</p>
+<ul>
+<li><code>Uncaught SyntaxError: Unexpected token &#39;&lt;&#39;</code></li>
+</ul>
+<h3 id="根因（常见两种）"><a href="#根因（常见两种）" class="headerlink" title="根因（常见两种）"></a>根因（常见两种）</h3><ol>
+<li><strong>JS 里混入了 HTML</strong>：例如把 <code>&lt;div&gt;...&lt;/div&gt;</code> 或嵌套 <code>&lt;script&gt;</code> 放进了 JS 上下文，解析器遇到 <code>&lt;</code> 就报错。<br>MDN 对 “Unexpected token” 的说明：解析器在当前位置遇到不符合语法的标记会抛错。citeturn0search3  </li>
+<li><strong>请求到的“JS 文件”实际返回了 HTML</strong>（比如 404 页面 &#x2F; 重定向页），同样会以 <code>&lt;html...</code> 开头导致报错（典型现象）。citeturn0search7</li>
+</ol>
+<h3 id="排查步骤（当时很有效）"><a href="#排查步骤（当时很有效）" class="headerlink" title="排查步骤（当时很有效）"></a>排查步骤（当时很有效）</h3><ul>
+<li>看 console 第一条红错，确认是否是 <code>Unexpected token &#39;&lt;&#39;</code>。</li>
+<li>验证 jQuery 是否存在：<code>window.jQuery</code>。</li>
+<li>验证 DOM 元素是否存在：<code>document.getElementById(&quot;yearprogress_yearname&quot;)</code>。</li>
+<li>手动写入测试：<code>document.getElementById(&quot;yearprogress_yearname&quot;).textContent=&quot;TEST&quot;</code><br>若能显示 <code>TEST</code>，说明是“初始化没执行&#x2F;报错中断”，而不是 CSS 隐藏。</li>
+</ul>
+<h3 id="额外注意：WordPress-可能过滤"><a href="#额外注意：WordPress-可能过滤" class="headerlink" title="额外注意：WordPress 可能过滤 &lt;script&gt;"></a>额外注意：WordPress 可能过滤 <code>&lt;script&gt;</code></h3><p>WordPress 文档说明：如果用户缺少 <code>unfiltered_html</code> 权限，系统会用 <code>wp_kses()</code> 清理内容，<code>&lt;script&gt;</code> 之类标签会被剥离。citeturn2search1<br>（本次最终确认脚本能保留且 jQuery 存在，所以不是这个原因，但记录在这里方便以后排查。）</p>
+<hr>
+<h2 id="最终可用版本：只改小工具即可（修复冬季跨年-防止-interval-叠加）"><a href="#最终可用版本：只改小工具即可（修复冬季跨年-防止-interval-叠加）" class="headerlink" title="最终可用版本：只改小工具即可（修复冬季跨年 + 防止 interval 叠加）"></a>最终可用版本：只改小工具即可（修复冬季跨年 + 防止 interval 叠加）</h2><blockquote>
+<p>放在 <strong>外观 → 小工具 → 自定义 HTML</strong>（允许 HTML&#x2F;CSS&#x2F;JS 的位置）。</p>
+</blockquote>
+<div class="code-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress-wrapper&quot;</span> <span class="attr">style</span>=<span class="string">&quot;padding: 0&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 年份进度条 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress-info&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress-label&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;yearprogress_yearname&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-size: 1.3em; font-weight: bold&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;yearprogress_text_container&quot;</span> <span class="attr">class</span>=<span class="string">&quot;progress-percentage&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;yearprogress_progresstext&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-weight: bold&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;yearprogress_progresstext_full&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-weight: bold&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;yearprogress_progressbar&quot;</span> <span class="attr">class</span>=<span class="string">&quot;progress-bar bg-primary&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 季节进度条 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress-info&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-top: 12px; display: flex; align-items: center; justify-content: space-between&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;display: flex; align-items: center; gap: 8px&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;season_icon&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-size: 1.2em&quot;</span>&gt;</span>🌱<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;season_name&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-weight: normal&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;season_text_container&quot;</span> <span class="attr">class</span>=<span class="string">&quot;progress-percentage&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;season_progresstext&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-weight: normal&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;season_progresstext_full&quot;</span> <span class="attr">style</span>=<span class="string">&quot;font-weight: normal&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;progress&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;season_progressbar&quot;</span> <span class="attr">class</span>=<span class="string">&quot;progress-bar&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">no-pjax</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">function</span> <span class="title function_">getSeason</span>(<span class="params">month</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (month &gt;= <span class="number">2</span> &amp;&amp; month &lt;= <span class="number">4</span>) <span class="keyword">return</span> &#123;<span class="attr">name</span>: <span class="string">&quot;春季&quot;</span>, <span class="attr">startMonth</span>: <span class="number">2</span>, <span class="attr">endMonth</span>: <span class="number">4</span>, <span class="attr">color</span>: <span class="string">&#x27;#4cff7e&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;🌱&#x27;</span>&#125;;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (month &gt;= <span class="number">5</span> &amp;&amp; month &lt;= <span class="number">7</span>) <span class="keyword">return</span> &#123;<span class="attr">name</span>: <span class="string">&quot;夏季&quot;</span>, <span class="attr">startMonth</span>: <span class="number">5</span>, <span class="attr">endMonth</span>: <span class="number">7</span>, <span class="attr">color</span>: <span class="string">&#x27;#dc4437&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;☀️&#x27;</span>&#125;;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (month &gt;= <span class="number">8</span> &amp;&amp; month &lt;= <span class="number">10</span>) <span class="keyword">return</span> &#123;<span class="attr">name</span>: <span class="string">&quot;秋季&quot;</span>, <span class="attr">startMonth</span>: <span class="number">8</span>, <span class="attr">endMonth</span>: <span class="number">10</span>, <span class="attr">color</span>: <span class="string">&#x27;#ffcc4c&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;🍂&#x27;</span>&#125;;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">return</span> &#123;<span class="attr">name</span>: <span class="string">&quot;冬季&quot;</span>, <span class="attr">startMonth</span>: <span class="number">11</span>, <span class="attr">endMonth</span>: <span class="number">1</span>, <span class="attr">color</span>: <span class="string">&#x27;#4ccbff&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;❄️&#x27;</span>&#125;;</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">function</span> <span class="title function_">yearprogress_refresh</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (!<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;yearprogress_yearname&quot;</span>)) <span class="keyword">return</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>();</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> year = now.<span class="title function_">getFullYear</span>();</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#yearprogress_yearname&quot;</span>).<span class="title function_">text</span>(year);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> <span class="keyword">from</span> = <span class="keyword">new</span> <span class="title class_">Date</span>(year, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> to = <span class="keyword">new</span> <span class="title class_">Date</span>(year, <span class="number">11</span>, <span class="number">31</span>, <span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> progress = (((now - <span class="keyword">from</span>) / (to - <span class="keyword">from</span> + <span class="number">1</span>)) * <span class="number">100</span>).<span class="title function_">toFixed</span>(<span class="number">7</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> progressshort = (((now - <span class="keyword">from</span>) / (to - <span class="keyword">from</span> + <span class="number">1</span>)) * <span class="number">100</span>).<span class="title function_">toFixed</span>(<span class="number">2</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#yearprogress_progresstext&quot;</span>).<span class="title function_">text</span>(progressshort + <span class="string">&quot;%&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#yearprogress_progresstext_full&quot;</span>).<span class="title function_">text</span>(progress + <span class="string">&quot;%&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#yearprogress_progressbar&quot;</span>).<span class="title function_">css</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="string">&quot;width&quot;</span>: progress + <span class="string">&quot;%&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="string">&quot;background-color&quot;</span>: <span class="string">&quot;#607d8b&quot;</span></span></span><br><span class="line"><span class="language-javascript">  &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> yearColor = <span class="string">&quot;#607d8b&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#yearprogress_yearname&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;color&quot;</span>, yearColor);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#yearprogress_progresstext&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;color&quot;</span>, yearColor);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#yearprogress_progresstext_full&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;color&quot;</span>, yearColor);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// ===== 季节（修复冬季跨年）=====</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> month = now.<span class="title function_">getMonth</span>(); <span class="comment">// 0~11 citeturn0search0</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> season = <span class="title function_">getSeason</span>(month);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> startYear = year;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> endYear = year;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (season.<span class="property">name</span> === <span class="string">&quot;冬季&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span> (month === <span class="number">11</span>) &#123;          <span class="comment">// 12月：当年12月 -&gt; 次年2月</span></span></span><br><span class="line"><span class="language-javascript">      startYear = year;</span></span><br><span class="line"><span class="language-javascript">      endYear = year + <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125; <span class="keyword">else</span> &#123;                     <span class="comment">// 1~2月：去年12月 -&gt; 当年2月</span></span></span><br><span class="line"><span class="language-javascript">      startYear = year - <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">      endYear = year;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> seasonStart = <span class="keyword">new</span> <span class="title class_">Date</span>(startYear, season.<span class="property">startMonth</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> seasonEnd = <span class="keyword">new</span> <span class="title class_">Date</span>(endYear, season.<span class="property">endMonth</span> + <span class="number">1</span>, <span class="number">0</span>, <span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>); <span class="comment">// 本月最后一天技巧 citeturn0search6</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> seasonProgress = ((now - seasonStart) / (seasonEnd - seasonStart)) * <span class="number">100</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (seasonProgress &gt; <span class="number">100</span>) seasonProgress = <span class="number">100</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">if</span> (seasonProgress &lt; <span class="number">0</span>) seasonProgress = <span class="number">0</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_name&quot;</span>).<span class="title function_">text</span>(season.<span class="property">name</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_progresstext&quot;</span>).<span class="title function_">text</span>(seasonProgress.<span class="title function_">toFixed</span>(<span class="number">2</span>) + <span class="string">&quot;%&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_progresstext_full&quot;</span>).<span class="title function_">text</span>(seasonProgress.<span class="title function_">toFixed</span>(<span class="number">7</span>) + <span class="string">&quot;%&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_progressbar&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;width&quot;</span>, seasonProgress + <span class="string">&quot;%&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_name&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;color&quot;</span>, season.<span class="property">color</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_progresstext&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;color&quot;</span>, season.<span class="property">color</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_progresstext_full&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;color&quot;</span>, season.<span class="property">color</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_icon&quot;</span>).<span class="title function_">text</span>(season.<span class="property">icon</span>);</span></span><br><span class="line"><span class="language-javascript">  $(<span class="string">&quot;#season_progressbar&quot;</span>).<span class="title function_">css</span>(<span class="string">&quot;background-color&quot;</span>, season.<span class="property">color</span>);</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 初始化 + 防止 interval 叠加</span></span></span><br><span class="line"><span class="language-javascript"><span class="title function_">yearprogress_refresh</span>();</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">__yearProgressIntervalId</span>) <span class="built_in">clearInterval</span>(<span class="variable language_">window</span>.<span class="property">__yearProgressIntervalId</span>);</span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">window</span>.<span class="property">__yearProgressIntervalId</span> = <span class="built_in">setInterval</span>(yearprogress_refresh, <span class="number">500</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-id">#yearprogress_text_container</span>, <span class="selector-id">#season_text_container</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">height</span>: <span class="number">22px</span>;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">user-select</span>: none;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-id">#yearprogress_text_container</span> &gt; <span class="selector-tag">span</span>, <span class="selector-id">#season_text_container</span> &gt; <span class="selector-tag">span</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">transition</span>: all <span class="number">0.3s</span> ease;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">display</span>: block;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-id">#yearprogress_text_container</span><span class="selector-pseudo">:hover</span> &gt; <span class="selector-tag">span</span>, <span class="selector-id">#season_text_container</span><span class="selector-pseudo">:hover</span> &gt; <span class="selector-tag">span</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">45px</span>);</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-id">#season_progressbar</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">transition</span>: width <span class="number">0.5s</span> ease, background-color <span class="number">0.5s</span> ease;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-id">#yearprogress_yearname</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">transition</span>: font-size <span class="number">0.3s</span> ease;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="comment">/* 季节字体变细 */</span></span></span><br><span class="line"><span class="language-css"><span class="selector-id">#season_name</span>, <span class="selector-id">#season_progresstext</span>, <span class="selector-id">#season_progresstext_full</span> &#123;</span></span><br><span class="line"><span class="language-css">  <span class="attribute">font-weight</span>: normal <span class="meta">!important</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h2 id="经验总结（下次遇到类似问题怎么快查）"><a href="#经验总结（下次遇到类似问题怎么快查）" class="headerlink" title="经验总结（下次遇到类似问题怎么快查）"></a>经验总结（下次遇到类似问题怎么快查）</h2><ul>
+<li><strong>先看 Console 第一条红错</strong>：<code>Unexpected token &#39;&lt;&#39;</code> 往往就是“JS 里混了 HTML”或“加载到的 JS 实际是 HTML”。citeturn0search3turn0search7  </li>
+<li>时间相关逻辑先确认：<ul>
+<li><code>getMonth()</code> 是 <strong>0~11</strong>（0&#x3D;1月）。citeturn0search0</li>
+<li>跨年区间不要只改一个年份变量，开始&#x2F;结束年要分开算。</li>
+</ul>
+</li>
+<li>WordPress 里 <code>&lt;script&gt;</code> 被吃掉：优先检查是否有 <code>unfiltered_html</code>。citeturn2search1</li>
+<li>需要算月末：<code>new Date(y, m+1, 0)</code> 是最简洁常用法。citeturn0search6</li>
+</ul>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> </li>
+        <li><strong>Author:</strong> Heart</li>
+        <li><strong>Created at
+                :</strong> 2026-01-01 14:29:42</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2026-01-01 13:55:57
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://yhalo-wyh.github.io/2026/01/01/解决日记-年份季节进度条-Argon-2026-01-01/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/2025/12/31/WordPress%E5%8F%8B%E9%93%BE%E7%94%B3%E8%AF%B7%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">WordPress友链申请功能开发踩坑记录</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="giscus-container"></div>
+    <script data-swup-reload-script defer>
+        async function loadGiscus() {
+            const giscusConfig = {
+                'src': 'https://giscus.app/client.js',
+                'data-repo': 'YHalo-wyh/YHalo-wyh.github.io',
+                'data-repo-id': 'R_kgDOPO1R3A',
+                'data-category': 'Announcements',
+                'data-category-id': 'DIC_kwDOPO1R3M4CutEG',
+                'data-mapping': 'pathname',
+                'data-strict': '0',
+                'data-reactions-enabled': '1',
+                'data-emit-metadata': '1',
+                'data-theme': 'preferred_color_scheme',
+                'data-lang': 'zh-CN',
+                'data-input-position': 'bottom',
+                'data-loading': 'lazy',
+                'crossorigin': 'anonymous',
+                'async': true
+            }
+            const giscusScript = document.createElement('script');
+            for (const key in giscusConfig) {
+                giscusScript.setAttribute(key, giscusConfig[key]);
+            }
+            document.getElementById('giscus-container').appendChild(giscusScript);
+        }
+        if ('true') {
+            let loadGiscusTimeout = setTimeout(() => {
+                loadGiscus();
+                clearTimeout(loadGiscusTimeout);
+            }, 1000);
+        } else {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+        }
+    </script>
+
+
+        
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title"></div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%97%A5%E8%AE%B0%EF%BC%9AArgon-%E4%B8%BB%E9%A2%98%E5%B0%8F%E5%B7%A5%E5%85%B7%E3%80%8C%E5%B9%B4%E4%BB%BD-%E5%AD%A3%E8%8A%82%E8%BF%9B%E5%BA%A6%E6%9D%A1%E3%80%8D%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E9%BC%A0%E6%A0%87%E5%85%89%E6%A0%87%EF%BC%882026-01-01%EF%BC%89"><span class="nav-text">解决日记：Argon 主题小工具「年份&#x2F;季节进度条」与自定义鼠标光标（2026-01-01）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E5%A4%A9%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-text">今天做了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-1%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%BC%A0%E6%A0%87%E5%85%89%E6%A0%87%E5%9C%A8%E7%BD%91%E9%A1%B5%E5%8F%98%E7%AA%84%E6%97%B6%E6%B6%88%E5%A4%B1"><span class="nav-text">问题 1：自定义鼠标光标在网页变窄时消失</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1"><span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E5%86%99%E6%B3%95%EF%BC%88%E6%A1%8C%E9%9D%A2%E7%AB%AF-hover-%E6%89%8D%E6%98%BE%E7%A4%BA%EF%BC%89"><span class="nav-text">推荐写法（桌面端 hover 才显示）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-2%EF%BC%9A%E5%AD%A3%E8%8A%82%E8%BF%9B%E5%BA%A6%E6%9D%A1%E3%80%8C%E4%B8%8D%E5%8A%A8%E3%80%8D-%E5%86%AC%E5%AD%A3%E8%BF%9B%E5%BA%A6%E7%AE%97%E9%94%99"><span class="nav-text">问题 2：季节进度条「不动」&#x2F; 冬季进度算错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1-1"><span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E5%9B%A0"><span class="nav-text">根因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-3%EF%BC%9AUI-%E4%B8%8D%E6%98%BE%E7%A4%BA-%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8A%A5%E9%94%99-Unexpected-token"><span class="nav-text">问题 3：UI 不显示 + 控制台报错 Unexpected token &#39;&lt;&#39;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1-2"><span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E5%9B%A0%EF%BC%88%E5%B8%B8%E8%A7%81%E4%B8%A4%E7%A7%8D%EF%BC%89"><span class="nav-text">根因（常见两种）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5%E6%AD%A5%E9%AA%A4%EF%BC%88%E5%BD%93%E6%97%B6%E5%BE%88%E6%9C%89%E6%95%88%EF%BC%89"><span class="nav-text">排查步骤（当时很有效）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96%E6%B3%A8%E6%84%8F%EF%BC%9AWordPress-%E5%8F%AF%E8%83%BD%E8%BF%87%E6%BB%A4"><span class="nav-text">额外注意：WordPress 可能过滤 &lt;script&gt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E5%8F%AF%E7%94%A8%E7%89%88%E6%9C%AC%EF%BC%9A%E5%8F%AA%E6%94%B9%E5%B0%8F%E5%B7%A5%E5%85%B7%E5%8D%B3%E5%8F%AF%EF%BC%88%E4%BF%AE%E5%A4%8D%E5%86%AC%E5%AD%A3%E8%B7%A8%E5%B9%B4-%E9%98%B2%E6%AD%A2-interval-%E5%8F%A0%E5%8A%A0%EF%BC%89"><span class="nav-text">最终可用版本：只改小工具即可（修复冬季跨年 + 防止 interval 叠加）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%8B%E6%AC%A1%E9%81%87%E5%88%B0%E7%B1%BB%E4%BC%BC%E9%97%AE%E9%A2%98%E6%80%8E%E4%B9%88%E5%BF%AB%E6%9F%A5%EF%BC%89"><span class="nav-text">经验总结（下次遇到类似问题怎么快查）</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Heart</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        6 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+            
+        
+    </div>  
+   
+
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+	<div id="aplayer"></div>
+
+<script src="/js/build/libs/APlayer.min.js"></script>
+
+
+<script src="/js/build/plugins/aplayer.js"></script>
+
+
+	
+
+</body>
+
+</html>
