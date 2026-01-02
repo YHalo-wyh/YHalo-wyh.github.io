@@ -177,6 +177,13 @@
             
                 
                     <style>
+/* preloader 文字颜色 - 必须在最前面，不依赖body class */
+div.preloader>h2.ml13{color:#C9A227 !important}
+html[data-theme="dark"] div.preloader>h2.ml13,
+html.dark div.preloader>h2.ml13{color:#fff !important}
+@media(prefers-color-scheme:dark){
+  html:not([data-theme="light"]):not(.light) div.preloader>h2.ml13{color:#fff !important}
+}
 /* 亮色模式首页导航栏金色 */
 body.light-mode.home .navbar-container .navbar-content .navbar-item,
 body.light-mode.home .navbar-container .navbar-content .navbar-item>a,
@@ -209,9 +216,6 @@ body.light-mode .navbar-container .sub-menu a:hover{color:#B8860B !important}
 /* 统计数字颜色 */
 body.dark-mode .statistics .label,body.dark-mode .statistics .number{color:#fff !important}
 body.light-mode .statistics .label,body.light-mode .statistics .number{color:#000 !important}
-/* 预加载文字颜色 */
-body.light-mode div.preloader>h2.ml13{color:#C9A227 !important}
-body.dark-mode div.preloader>h2.ml13{color:#fff !important}
 /* 侧边栏作者信息 */
 body.dark-mode .sidebar .author-info .author-name,
 body.dark-mode .sidebar .author-info .author-label{color:#fff !important}
@@ -724,24 +728,6 @@ body.dark-mode .sidebar .author-info .author-label{color:#fff !important}
 		<ul class="tag-list" data-show-value="true">
 			
 				<li>
-					<a data-weight="1" href="/tags/C/">
-						<i class="fa-solid fa-hashtag"></i>C++
-					</a>
-				</li>
-			
-				<li>
-					<a data-weight="1" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-						<i class="fa-solid fa-hashtag"></i>知识图谱
-					</a>
-				</li>
-			
-				<li>
-					<a data-weight="1" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-						<i class="fa-solid fa-hashtag"></i>数据结构
-					</a>
-				</li>
-			
-				<li>
 					<a data-weight="1" href="/tags/aplayer/">
 						<i class="fa-solid fa-hashtag"></i>aplayer
 					</a>
@@ -778,14 +764,38 @@ body.dark-mode .sidebar .author-info .author-label{color:#fff !important}
 				</li>
 			
 				<li>
-					<a data-weight="2" href="/tags/enemy/">
-						<i class="fa-solid fa-hashtag"></i>enemy
+					<a data-weight="1" href="/tags/player/">
+						<i class="fa-solid fa-hashtag"></i>player
 					</a>
 				</li>
 			
 				<li>
 					<a data-weight="3" href="/tags/godot/">
 						<i class="fa-solid fa-hashtag"></i>godot
+					</a>
+				</li>
+			
+				<li>
+					<a data-weight="1" href="/tags/C/">
+						<i class="fa-solid fa-hashtag"></i>C++
+					</a>
+				</li>
+			
+				<li>
+					<a data-weight="1" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+						<i class="fa-solid fa-hashtag"></i>知识图谱
+					</a>
+				</li>
+			
+				<li>
+					<a data-weight="1" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+						<i class="fa-solid fa-hashtag"></i>数据结构
+					</a>
+				</li>
+			
+				<li>
+					<a data-weight="2" href="/tags/enemy/">
+						<i class="fa-solid fa-hashtag"></i>enemy
 					</a>
 				</li>
 			
@@ -798,12 +808,6 @@ body.dark-mode .sidebar .author-info .author-label{color:#fff !important}
 				<li>
 					<a data-weight="1" href="/tags/Argon/">
 						<i class="fa-solid fa-hashtag"></i>Argon
-					</a>
-				</li>
-			
-				<li>
-					<a data-weight="1" href="/tags/player/">
-						<i class="fa-solid fa-hashtag"></i>player
 					</a>
 				</li>
 			

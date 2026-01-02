@@ -148,8 +148,8 @@
 <meta property="article:published_time" content="2025-08-11T07:18:01.000Z">
 <meta property="article:modified_time" content="2025-12-31T12:54:53.921Z">
 <meta property="article:author" content="Heart">
-<meta property="article:tag" content="enemy">
 <meta property="article:tag" content="godot">
+<meta property="article:tag" content="enemy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yhalo-wyh.github.io/images/redefine-og.webp">
     
@@ -179,6 +179,13 @@
             
                 
                     <style>
+/* preloader 文字颜色 - 必须在最前面，不依赖body class */
+div.preloader>h2.ml13{color:#C9A227 !important}
+html[data-theme="dark"] div.preloader>h2.ml13,
+html.dark div.preloader>h2.ml13{color:#fff !important}
+@media(prefers-color-scheme:dark){
+  html:not([data-theme="light"]):not(.light) div.preloader>h2.ml13{color:#fff !important}
+}
 /* 亮色模式首页导航栏金色 */
 body.light-mode.home .navbar-container .navbar-content .navbar-item,
 body.light-mode.home .navbar-container .navbar-content .navbar-item>a,
@@ -211,9 +218,6 @@ body.light-mode .navbar-container .sub-menu a:hover{color:#B8860B !important}
 /* 统计数字颜色 */
 body.dark-mode .statistics .label,body.dark-mode .statistics .number{color:#fff !important}
 body.light-mode .statistics .label,body.light-mode .statistics .number{color:#000 !important}
-/* 预加载文字颜色 */
-body.light-mode div.preloader>h2.ml13{color:#C9A227 !important}
-body.dark-mode div.preloader>h2.ml13{color:#fff !important}
 /* 侧边栏作者信息 */
 body.dark-mode .sidebar .author-info .author-name,
 body.dark-mode .sidebar .author-info .author-label{color:#fff !important}
@@ -775,11 +779,11 @@ body.dark-mode .sidebar .author-info .author-label{color:#fff !important}
             <ul>
                 
                     <li>
-                        <a href="/tags/enemy/">enemy</a>&nbsp;
+                        <a href="/tags/godot/">godot</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/godot/">godot</a>&nbsp;
+                        | <a href="/tags/enemy/">enemy</a>&nbsp;
                     </li>
                 
             </ul>
@@ -903,11 +907,11 @@ body.dark-mode .sidebar .author-info .author-label{color:#fff !important}
 		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
 			
 			<li class="tag-item mx-0.5">
-				<a href="/tags/enemy/">#enemy</a>&nbsp;
+				<a href="/tags/godot/">#godot</a>&nbsp;
 			</li>
 			
 			<li class="tag-item mx-0.5">
-				<a href="/tags/godot/">#godot</a>&nbsp;
+				<a href="/tags/enemy/">#enemy</a>&nbsp;
 			</li>
 			
 		</ul>
